@@ -156,7 +156,7 @@ Status PosixSequentialFile::Read(size_t n, Slice* result, char* scratch) {
   Status s;
   size_t r = 0;
   do {
-    r = fread_unlocked(scratch, 1, n, file_);
+    r = fread(scratch, 1, n, file_);
   } while (r == 0 && ferror(file_) && errno == EINTR);
   *result = Slice(scratch, r);
   if (r < n) {
